@@ -19,23 +19,6 @@
     upgrade: yes
     available: yes
     update_cache: yes
-- name: Create startup scripts
-  copy:
-    dest: "/etc/local.d/10-netfilter_set.start"
-    content: |
-      #!/bin/sh
-      sysctl -w net.netfilter.nf_conntrack_max=131072
-      exit
-    mode: a+x
-- name: Create shared mount script
-  copy:
-    dest: "/etc/local.d/00-make-share-mounts.start"
-    content: |
-      #!/bin/sh
-      mount --make-shared /
-      mount --make-rshared /
-      exit
-    mode: a+x
 - name: Add services to startup
   service:
     name: local
