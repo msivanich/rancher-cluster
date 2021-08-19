@@ -1,0 +1,4 @@
+masters:
+  hosts:
+    tf-rancher-master-0:
+      ansible_host: 10.0.0.34
