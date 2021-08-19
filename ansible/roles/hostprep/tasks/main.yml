@@ -1,0 +1,38 @@
+---
+# tasks file for hostprep
+- name: Change Hostname
+  ansible.builtin.hostname:
+    name: '{{ inventory_hostname }}'
+      # name: ansible-rancher-02
+    use: alpine
+- name: Change hosts file
+  ansible.builtin.replace:
+    path: /etc/hosts
+    regexp: 'base-alpine-template'
+    replace: '{{ inventory_hostname }}'
+- name: Add apk repository
+  lineinfile:
+    path: /etc/apk/repositories
+    line: 'http://dl-cdn.alpinelinux.org/alpine/v3.14/community'
+- name: Create startup scripts
+  copy:
+    dest: "/etc/local.d/10-netfilter_set.start"
+    content: |
+      #!/bin/sh
+      sysctl -w net.netfilter.nf_conntrack_max=131072
+      exit
+    mode: a+x
+  copy:
+    dest: "/etc/local.d/00-make-share-mounts.start"
+    content: |
+      #!/bin/sh
+      mount --make-shared /
+      mount --make-rshared /
+      exit
+    mode: a+x
+- name: Add services to startup
+  service:
+    name: local
+    enabled: yes
+    runlevel: default
+    state: started
