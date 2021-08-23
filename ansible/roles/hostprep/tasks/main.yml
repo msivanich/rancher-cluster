@@ -10,18 +10,23 @@
     path: /etc/hosts
     regexp: 'template'
     replace: '{{ inventory_hostname }}'
-- name: Add apk repository
-  lineinfile:
-    path: /etc/apk/repositories
-    line: 'http://dl-cdn.alpinelinux.org/alpine/v3.14/community'
-- name: Upgrade packages
-  community.general.apk:
-    upgrade: yes
-    available: yes
+- name: Update repository
+  apt:
     update_cache: yes
-- name: Add services to startup
-  service:
-    name: local
-    enabled: yes
-    runlevel: default
-    state: started
+
+
+#- name: Add apk repository
+#  lineinfile:
+#    path: /etc/apk/repositories
+#    line: 'http://dl-cdn.alpinelinux.org/alpine/v3.14/community'
+#- name: Upgrade packages
+#  community.general.apk:
+#    upgrade: yes
+#    available: yes
+#    update_cache: yes
+#- name: Add services to startup
+#  service:
+#    name: local
+#    enabled: yes
+#    runlevel: default
+#    state: started
