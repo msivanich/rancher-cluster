@@ -2,3 +2,5 @@
 - hosts: masters
   roles:
     - hostprep
+    - requirements
+    - ranchernodeprep
