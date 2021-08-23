@@ -1,0 +1,5 @@
+---
+- hosts: masters
+  gather_facts: False
+  roles:
+    - templateprep

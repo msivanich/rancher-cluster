@@ -8,7 +8,7 @@
 - name: Change hosts file
   ansible.builtin.replace:
     path: /etc/hosts
-    regexp: 'base-alpine-template'
+    regexp: 'template'
     replace: '{{ inventory_hostname }}'
 - name: Add apk repository
   lineinfile:

@@ -1,2 +1,3 @@
 ---
+- import_playbook: templateprep.yaml
 - import_playbook: ranchernodes.yaml

@@ -2,3 +2,8 @@ masters:
   hosts:
     tf-rancher-master-0:
       ansible_host: 10.0.0.34
+  vars:
+    rancher_server: https://10.0.0.34
+    rancher_token: k2q2l9vtxfshh269smmmrg9vn58r2tlzqsq8lx6kttrhrdbvzqhtq5
+    rancher_checksum: 5c9870303cca717ad886a4375a97a1b614eb1d07964cdae45ebc9a4cf2fc4bb8 
+    
