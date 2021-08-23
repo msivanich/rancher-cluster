@@ -22,7 +22,7 @@
     name: local
     enabled: yes
     runlevel: default
-    state: started
+    state: restarted
 - name: Install needed packages
   community.general.apk:
     name: docker

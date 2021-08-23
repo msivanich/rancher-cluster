@@ -1,4 +1,7 @@
 ---
 - hosts: masters
+  gather_facts: True
   roles:
-    - hostprep
+#    - hostprep
+#    - ranchernodeprep
+    - ranchernodeinstall

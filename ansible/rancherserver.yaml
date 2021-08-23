@@ -1,34 +1,8 @@
-- name: Doing Stuff
-  hosts: masters
+- hosts: masters
+  gather_facts: True
   vars:
-    ansible_ssh_private_key_file: ~/.ssh/id_rsa_alpine
-  become: yes
+    ansible_ssh_private_key_file: "~/.ssh/template.id_rsa"
   tasks:
-    - name: Add Groups
-      ansible.builtin.group:
-        name: storage
-        gid: 1200
-    - name: Add users
-      ansible.builtin.user:
-        name: pig
-        uid: 1000
-        group: storage
-          #        groups: docker,wheel
-    - name: Add management ssh key
-      ansible.posix.authorized_key:
-        user: pig
-        key: "{{ lookup('file','/home/pig/.ssh/id_rsa_alpine.pub') }}"
-    - name: Update apk repository
-      community.general.apk:
-        update_cache: yes
-
-    - name: Install needed packages
-      community.general.apk:
-        name: git,docker,sudo,qemu-guest-agent,udev,py-pip,docker-py
-    - name: Add services to startup
-      service:
-        name: docker
-        enabled: yes
-        runlevel: default
-        state: started
- 
+  - name: Doing Stuff
+    raw: docker run -d --restart=no -p 80:80 -p 443:443 --privileged --name rancher-server rancher/rancher:v2.6.0-rc4
+  #v2.6.0-rc4
