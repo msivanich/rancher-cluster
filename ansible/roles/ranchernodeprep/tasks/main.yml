@@ -1,32 +1,37 @@
 ---
 # tasks file for ranchernodeprep
-- name: Create startup scripts
-  copy:
-    dest: "/etc/local.d/10-netfilter_set.start"
-    content: |
-      #!/bin/sh
-      sysctl -w net.netfilter.nf_conntrack_max=131072
-      exit
-    mode: a+x
-- name: Create shared mount script
-  copy:
-    dest: "/etc/local.d/00-make-share-mounts.start"
-    content: |
-      #!/bin/sh
-      mount --make-shared /
-      mount --make-rshared /
-      exit
-    mode: a+x
-- name: Add services to startup
-  service:
-    name: local
-    enabled: yes
-    runlevel: default
-    state: restarted
-- name: Install needed packages
-  community.general.apk:
-    name: docker
-    update_cache: yes
+#- name: Create startup scripts
+#  copy:
+#    dest: "/etc/local.d/10-netfilter_set.start"
+#    content: |
+#      #!/bin/sh
+#      sysctl -w net.netfilter.nf_conntrack_max=131072
+#      exit
+#    mode: a+x
+#- name: Create shared mount script
+#  copy:
+#    dest: "/etc/local.d/00-make-share-mounts.start"
+#    content: |
+#      #!/bin/sh
+#      mount --make-shared /
+#      mount --make-rshared /
+#      exit
+#    mode: a+x
+#- name: Add services to startup
+#  service:
+#    name: local
+#    enabled: yes
+##    runlevel: default
+#    state: restarted
+#- name: Install needed packages
+#  community.general.apk:
+#    name: docker
+#    update_cache: yes
+- name: Install required packages
+  apt:
+    pkg:
+    - docker.io
+    - docker-compose
 - name: Add Docker to startup
   service:
     name: docker
