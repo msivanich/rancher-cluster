@@ -1,8 +1,8 @@
-- hosts: masters
+- hosts: rancher_servers
   gather_facts: True
   vars:
     ansible_ssh_private_key_file: "~/.ssh/template.id_rsa"
   tasks:
-  - name: Doing Stuff
-    raw: docker run -d --restart=no -p 80:80 -p 443:443 --privileged --name rancher-server rancher/rancher:v2.6.0-rc4
+  - name: Installing Rancher Server
+    raw: docker run -d --restart=no -p 80:80 -p 443:443 --privileged --name rancher-server rancher/rancher:{{ rancher_version }}
   #v2.6.0-rc4

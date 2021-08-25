@@ -1,4 +1,4 @@
 ---
 # tasks file for ranchernodeinstall
-- name: Doing Stuff
-  raw: 'docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run  rancher/rancher-agent:v2.6.0-rc4 --server {{ rancher_server }} --token {{ rancher_token }} --ca-checksum {{ rancher_checksum}} --etcd --controlplane --worker'
+- name: Install Rancher Agent
+  raw: 'docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run  rancher/rancher-agent:{{ rancher_version }} --server {{ rancher_server }} --token {{ rancher_token }} --ca-checksum {{ rancher_checksum}} --etcd --controlplane --worker'

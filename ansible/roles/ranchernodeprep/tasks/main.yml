@@ -32,9 +32,10 @@
     pkg:
     - docker.io
     - docker-compose
+    update_cache: yes
 - name: Add Docker to startup
   service:
     name: docker
     enabled: yes
-    runlevel: default
+#    runlevel: default
     state: started

@@ -4,7 +4,7 @@
   ansible.builtin.hostname:
     name: '{{ inventory_hostname }}'
       # name: ansible-rancher-02
-    use: alpine
+    use: systemd
 - name: Change hosts file
   ansible.builtin.replace:
     path: /etc/hosts
