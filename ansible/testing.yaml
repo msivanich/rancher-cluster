@@ -4,8 +4,8 @@ rancher_servers:
       ansible_host: 10.0.0.27
   vars:
     rancher_server: https://10.0.0.34
-    rancher_token: k2q2l9vtxfshh269smmmrg9vn58r2tlzqsq8lx6kttrhrdbvzqhtq5
-    rancher_checksum: 5c9870303cca717ad886a4375a97a1b614eb1d07964cdae45ebc9a4cf2fc4bb8 
+    rancher_token: pmjjxxwljmpv6fvrgztjqkfj2stt7n62cfxtwp6xs8wx52ssbzjbqf
+    rancher_checksum: 63adfa04b387e3df4dc9a15c4dec27a0c13f7169d50d07e5d55431d8754f6ada  
     rancher_version: latest
 rancher_masters:
   hosts:
@@ -14,10 +14,10 @@ rancher_masters:
     tf-rancher-master-1:
       ansible_host: 10.0.0.34    
   vars:
-    rancher_server: https://10.0.0.34
-    rancher_token: k2q2l9vtxfshh269smmmrg9vn58r2tlzqsq8lx6kttrhrdbvzqhtq5
-    rancher_checksum: 5c9870303cca717ad886a4375a97a1b614eb1d07964cdae45ebc9a4cf2fc4bb8 
-    rancher_version: latest
+    rancher_server: https://10.0.0.27
+    rancher_token: pmjjxxwljmpv6fvrgztjqkfj2stt7n62cfxtwp6xs8wx52ssbzjbqf
+    rancher_checksum: 63adfa04b387e3df4dc9a15c4dec27a0c13f7169d50d07e5d55431d8754f6ada  
+    rancher_version: v2.3.5
 rancher_workers:
   hosts:
     tf-rancher-worker-0:
@@ -25,7 +25,7 @@ rancher_workers:
     tf-rancher-worker-1:
       ansible_host: 10.0.0.31
   vars:
-    rancher_server: https://10.0.0.34
-    rancher_token: k2q2l9vtxfshh269smmmrg9vn58r2tlzqsq8lx6kttrhrdbvzqhtq5
-    rancher_checksum: 5c9870303cca717ad886a4375a97a1b614eb1d07964cdae45ebc9a4cf2fc4bb8 
-    rancher_version: latest
+    rancher_server: https://10.0.0.27
+    rancher_token: pmjjxxwljmpv6fvrgztjqkfj2stt7n62cfxtwp6xs8wx52ssbzjbqf
+    rancher_checksum: 63adfa04b387e3df4dc9a15c4dec27a0c13f7169d50d07e5d55431d8754f6ada  
+    rancher_version: v2.3.5

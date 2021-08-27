@@ -1,0 +1,4 @@
+---
+# tasks file for ranchernodeinstall
+- name: Install Rancher Agent for Workers
+  raw: 'docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes -v /var/run:/var/run  rancher/rancher-agent:{{ rancher_version }} --server {{ rancher_server }} --token {{ rancher_token }} --ca-checksum {{ rancher_checksum}} --worker'

@@ -1,0 +1,5 @@
+---
+- hosts: rancher_workers
+  gather_facts: True
+  roles:
+    - rancherworkers
