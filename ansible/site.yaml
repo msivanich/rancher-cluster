@@ -1,6 +1,12 @@
 ---
-#- import_playbook: templateprep.yaml
-#- import_playbook: ranchernodes.yaml
-#- import_playbook: rancherserver.yaml
-- import_playbook: ranchermasters.yaml
-- import_playbook: rancherworkers.yaml
+
+# 1.) Basic host prep (host_prep)
+# 2.) Install rancher pre-reqs (rancher_prereqs)
+# 3.) Install Rancher Server (rancher_server_inst)  
+# 4.) Create Rancher Cluster (rancher_cluster)
+# 5.) Join Masters and Workers to new cluster (rancher_cluster_nodes)
+
+- import_playbook: rancher_nodes.yaml
+- import_playbook: rancher_server.yaml
+- import_playbook: rancher_cluster_create.yaml
+- import_playbook: rancher_cluster_nodes.yaml

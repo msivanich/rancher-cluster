@@ -1,0 +1,7 @@
+---
+- hosts: all_cluster_nodes
+  gather_facts: True
+  roles:
+    - host_prep
+    - rancher_prereqs
+    - rancher_cluster_nodes

@@ -1,0 +1,7 @@
+---
+- hosts: rancher_server
+  gather_facts: True
+  roles:
+    - host_prep
+    - rancher_prereqs
+    - rancher_server_inst
