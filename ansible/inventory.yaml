@@ -5,18 +5,29 @@ all:
       hosts:
         tf-rancher-server-0:
           ansible_host: 10.0.0.27
+      vars:
+        rancher_server_version: "latest"
+        rancher_server_user: "admin"
+        rancher_server_pass: "admin"
+        rancher_url: "https://10.0.0.27"
+        cluster_name: "newcluster4"
+        nodecommand: ''
     rancher_masters:
       hosts:
         tf-rancher-master-0:
           ansible_host: 10.0.0.24
         tf-rancher-master-1:
           ansible_host: 10.0.0.34
+      vars:
+        rancher_switches: " --etcd --controlplane"
     rancher_workers:
       hosts:
         tf-rancher-worker-0:
           ansible_host: 10.0.0.22
         tf-rancher-worker-1:
           ansible_host: 10.0.0.31
+      vars:
+        rancher_switches: " --worker"
     all_cluster_nodes:
       children:
         rancher_masters:

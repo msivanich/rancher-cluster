@@ -1,6 +1,5 @@
 ---
-- hosts: all
+- hosts: rancher_servers
   gather_facts: True
   roles:
-    - host_prep
-    - rancher_prereqs
+    - rancher_cluster_create

@@ -1,5 +1,5 @@
 ---
-- hosts: rancher_server
+- hosts: rancher_servers
   gather_facts: True
   roles:
     - host_prep

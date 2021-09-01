@@ -6,7 +6,8 @@
 # 4.) Create Rancher Cluster (rancher_cluster)
 # 5.) Join Masters and Workers to new cluster (rancher_cluster_nodes)
 
-- import_playbook: rancher_nodes.yaml
-- import_playbook: rancher_server.yaml
+#- import_playbook: rancher_nodes.yaml
+#- import_playbook: rancher_server.yaml
 - import_playbook: rancher_cluster_create.yaml
+- import_playbook: debug.yaml
 - import_playbook: rancher_cluster_nodes.yaml

@@ -1,6 +1,6 @@
 ---
 
-- name: get registration tokens
+- name: Get login token
   uri:
     method: POST
     status_code: 201
@@ -9,13 +9,11 @@
     headers:
       Content-Type: "application/json"
     body_format: json
-    body: '{"username":"{{ username }}","password":"{{ password }}"}'
+    body: '{"username":"{{ rancher_server_user }}","password":"{{ rancher_server_pass }}"}'
   register: logintoken
-  tags:
-  - nodecommand
-- debug:
+    #- debug:
   #var: logintoken.json.token
-- name: make cluster
+- name: Create new cluster
   uri:
     method: POST
     status_code: 201
@@ -25,9 +23,9 @@
       Authorization: "Bearer {{ logintoken.json.token }}"
       Content-Type: "application/json"
     body_format: json
-    body: '{"dockerRootDir":"/var/lib/docker","enableNetworkPolicy":false,"type":"cluster","rancherKubernetesEngineConfig":{"addonJobTimeout":30,"ignoreDockerVersion":true,"sshAgentAuth":false,"type":"rancherKubernetesEngineConfig","authentication":{"type":"authnConfig","strategy":"x509"},"network":{"type":"networkConfig","plugin":"canal"},"ingress":{"type":"ingressConfig","provider":"nginx"},"monitoring":{"type":"monitoringConfig","provider":"metrics-server"},"services":{"type":"rkeConfigServices","kubeApi":{"podSecurityPolicy":false,"type":"kubeAPIService"},"etcd":{"snapshot":false,"type":"etcdService","extraArgs":{"heartbeat-interval":500,"election-timeout":5000}}}},"name":"{{ cluster_name }}"}'
+    body: '{"dockerRootDir":"/var/lib/docker","enableNetworkPolicy":false,"type":"cluster","rancherKubernetesEngineConfig":{"kubernetesVersion":"v1.19.13-rancher1-1","addonJobTimeout":30,"ignoreDockerVersion":true,"sshAgentAuth":false,"type":"rancherKubernetesEngineConfig","authentication":{"type":"authnConfig","strategy":"x509"},"network":{"type":"networkConfig","plugin":"calico"},"ingress":{"type":"ingressConfig","provider":"nginx"},"monitoring":{"type":"monitoringConfig","provider":"metrics-server"},"services":{"type":"rkeConfigServices","kubeApi":{"podSecurityPolicy":false,"type":"kubeAPIService"},"etcd":{"snapshot":false,"type":"etcdService","extraArgs":{"heartbeat-interval":500,"election-timeout":5000}}}},"name":"{{ cluster_name }}"}'
   register: clusterresponse
-- debug:
+    #- debug:
   #var: clusterresponse.json.id
 - name: Create Cluster Token
   uri:
@@ -41,9 +39,7 @@
     body_format: json
     body: '{"type":"clusterRegistrationToken","clusterId":"{{ clusterresponse.json.id }}"}'
   register: clusterregresponse
-  tags:
-  - nodecommand
-- debug:
+    #- debug:
   #var: clusterregresponse
 - name: Generate nodecommand
   uri:
@@ -57,8 +53,5 @@
     body_format: json
     body: '{"clusterId":"{{ clusterregresponse.json.clusterId }}","name":"","namespaceId":""}'
   register: nodecmd
-  tags:
-  - nodecommand
-- debug:
-  #var: nodecmd
-    msg: "{{ nodecmd.json.nodeCommand }} --etcd --controlplane --worker"
+- set_fact:
+    nodecommand: "{{ nodecmd.json.nodeCommand }}"
